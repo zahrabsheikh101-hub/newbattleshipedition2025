@@ -139,60 +139,60 @@ while playing:
  
             # ----- SONAR SCAN -----
             
-            if userShot == "SCAN":
-                if sonarUsed >= maxSonar:
+            if userShot == "SCAN": # ZS The sonar scan power-up is activated
+                if sonarUsed >= maxSonar: # ZS Checking if the power-up has been used the maximum amount of times it can be used
                     print("You have no Sonar scans left!")
                     continue
  
-                scancord = input("Enter the coordinates for the sonar scan: ").upper()
-                if len(scancord) != 2 or scancord[0] not in validColumns or scancord[1] not in validRows:
+                scancord = input("Enter the coordinates for the sonar scan: ").upper() # ZS Storing the coordinates the user wishes to scan around in a variable
+                if len(scancord) != 2 or scancord[0] not in validColumns or scancord[1] not in validRows: # ZS Checking if the inputted coordinates are valid
                     print("Invalid scan coordinate.")
                     continue
  
-                sonarUsed += 1
-                scanlist = shotToNumbers(scancord, validColumns)
+                sonarUsed += 1 # ZS The count of sonar power-ups used goee up by 1
+                scanlist = shotToNumbers(scancord, validColumns) # ZS Storign the scanned coordinates in a variable
  
                 print("----------")
                 print("SONAR SCAN RESULTS:")
-                found = False
+                found = False # ZS If the coordinates of a ship are not found initially 
  
-                for r in range(scanlist[0] - 1, scanlist[0] + 2):
-                    for c in range(scanlist[1] - 1, scanlist[1] + 2):
-                        if 0 <= r < gridSize and 0 <= c < gridSize:
-                            scannedArea.append([r, c])  # store scanned cells
-                            if shipMap[r][c] in shipSymbols:
+                for r in range(scanlist[0] - 1, scanlist[0] + 2): # ZS Checking around the inputted coordinates by a 3x3 area 
+                    for c in range(scanlist[1] - 1, scanlist[1] + 2): 
+                        if 0 <= r < gridSize and 0 <= c < gridSize: # ZS Checking if the 3x3 area reaches outside the map
+                            scannedArea.append([r, c])  # BM store scanned cells
+                            if shipMap[r][c] in shipSymbols: # ZS If a ship cell is found in the 3x3 area, found becomes True
                                 found = True
  
-                if found:
+                if found: # ZS The player is told whether or not the ship is found
                     print("Sonar detects a ship within 3x3 area!")
                 else:
                     print("No ships detected in this area")
  
-                continue  # back to input loop
+                continue  # BM back to input loop
  
             # ----- PRECISION STRIKE -----
             if userShot == "STRIKE":
-                if not precisionStrikeAvailable:
+                if not precisionStrikeAvailable: # ZS Checking if the power-up has been used before since it can be only used once per game
                     print("You have already used your precision strike!")
                     continue
                 
-                targetCells = []
-                for r in range(gridSize):
+                targetCells = [] # ZS Empty list of cells to target
+                for r in range(gridSize): # ZS For each row and column, the coordinates on the ship map from the imported file are searched for an unhit target
                     for c in range(gridSize):
-                        if shipMap[r][c] in shipSymbols:           # Placeholder behaviour (you can implement real effect later)
-                            targetCells.append((r, c))
+                        if shipMap[r][c] in shipSymbols:     # ZS The first ship cell found will be hit
+                            targetCells.append((r, c)) # ZS The cell is added to the target cells
                 
-                if not targetCells:
+                if not targetCells: # ZS If there are no cells lef to hit, the player has won and does not get to se this power-up
                     print("There are not ships left! Your got them all!")
                     precisionStrikeAvailable = False
                     continue
                     
-                target_r, target_c = random.choice(targetCells)
+                target_r, target_c = random.choice(targetCells) # ZS Randomly chooses new coordinates to hit
               
                 print("PRECISION HIT AT", target_r, target_c)
         
-                shotCoordinateList = [target_r, target_c]
-                precisionStrikeAvailable = False
+                shotCoordinateList = [target_r, target_c] # ZS Stores new coordinate in list of hit targets
+                precisionStrikeAvailable = False # ZS Once this power-up is used, ti cannot be accesed again
                 break
  
             # ----- NORMAL SHOT VALIDATION -----
@@ -256,3 +256,4 @@ while playing:
     # ----------- End of the Game. -----------
  
 print("\nThanks for playing!")
+
