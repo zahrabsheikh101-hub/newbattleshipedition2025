@@ -1,0 +1,10 @@
+O,O,O,O,O,O,O,O,O,O
+O,B,B,B,B,O,O,O,O,O
+O,O,O,O,S,O,O,O,O,O
+O,O,O,O,S,O,O,C,C,C
+O,O,O,O,S,O,O,O,O,O
+O,O,O,O,O,O,O,O,O,O
+O,O,O,O,O,O,O,O,O,O
+O,O,D,D,O,O,O,O,O,O
+O,O,O,O,O,O,O,O,O,O
+O,O,O,O,O,O,O,O,O,O
